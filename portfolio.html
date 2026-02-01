@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hassan Dawood | Agentic AI Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #f0f9ff;
+            --accent: #0ea5e9;
+            --text: #1e293b;
+            --light-text: #64748b;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Raleway', serif;
+            background-color: var(--secondary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 0;
+            z-index: 1000;
+            transition: var(--transition);
+            background: rgba(248, 246, 242, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        header.scrolled {
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 8rem 0 4rem;
+        }
+
+        .hero-content {
+            max-width: 650px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .hero h1 span {
+            display: inline-block;
+            color: var(--accent);
+            position: relative;
+        }
+
+        .hero h1 span:after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(14, 165, 233, 0.3);
+            z-index: -1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--light-text);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+            border: 2px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+            background: transparent;
+            color: var(--accent);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--accent);
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* About Section */
+        .section {
+            padding: 8rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            border-radius: 2px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--light-text);
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid rgba(14, 165, 233, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(14, 165, 233, 0.15);
+            border-color: rgba(14, 165, 233, 0.3);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), #7dd3fc);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 1.8rem;
+        }
+
+        .project-content h3 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .project-content p {
+            color: var(--light-text);
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .tag {
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            transition: var(--transition);
+            margin: 0.2rem;
+        }
+
+        .tag:hover {
+            background: rgba(14, 165, 233, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(14, 165, 233, 0.2);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.05) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .contact-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-details {
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(14, 165, 233, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-icon i {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .contact-text h4 {
+            color: var(--primary);
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-text p, .contact-text a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-text a:hover {
+            color: var(--accent);
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #bae6fd;
+            border-radius: 10px;
+            font-family: 'Raleway', serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-about h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .footer-about p {
+            color: #aaa;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h4 {
+            color: white;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn-outline {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Hassan<span>.</span></a>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Agentic <span>AI Engineer</span> & AI <span>Systems Builder</span></h1>
+                <p>I specialize in designing AI agents that can plan, execute, self-correct, and integrate with real-world tools and workflows.</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn">View My Work</a>
+                    <a href="#contact" class="btn btn-outline">Get In Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Hello, I'm Hassan Dawood 👋</h3>
+                    <p>I am an Agentic AI Engineer focused on building autonomous, production-ready AI systems that solve real business problems. I specialize in designing AI agents that can plan, execute, self-correct, and integrate with real-world tools and workflows.</p>
+                    <p>I build AI systems with planning, execution, and self-correction loops that can work with multiple LLMs like OpenAI, Claude, and Gemini. My expertise includes RAG pipelines powered by vector databases and AI workflow automation using n8n.</p>
+                    <p>My core strengths include clean, explainable, and modular agent architectures, cost-efficient and scalable LLM pipelines, and tool-calling agents for real-world automation.</p>
+                </div>
+                <div class="about-image floating">
+                    <img src="hassanagentic_ai.png" alt="Hassan Dawood - Agentic AI Engineer" style="width: 100%; height: auto; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Projects</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250' viewBox='0 0 400 250'%3E%3Crect fill='%23f0f9ff' width='400' height='250'/%3E%3Ccircle fill='%230ea5e9' cx='100' cy='80' r='20'/%3E%3Ccircle fill='%230ea5e9' cx='200' cy='80' r='20'/%3E%3Ccircle fill='%230ea5e9' cx='300' cy='80' r='20'/%3E%3Ccircle fill='%230ea5e9' cx='150' cy='160' r='20'/%3E%3Ccircle fill='%230ea5e9' cx='250' cy='160' r='20'/%3E%3Cpath fill='%230f172a' d='M100 80l50 80M200 80l-50 80M300 80l-50 80M150 160l50-80M250 160l-50-80' stroke='%230f172a' stroke-width='2'/%3E%3C/svg%3E" alt="Multi-LLM Architecture">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Multi-LLM</span>
+                            <span class="tag">OpenAI</span>
+                            <span class="tag">Claude</span>
+                        </div>
+                        <h3>Multi-LLM Task Agent</h3>
+                        <p>Model-agnostic agent with OpenAI, Claude, and Gemini integration, featuring planning, execution, and self-correction loops for complex task management.</p>
+                        <a href="#" class="btn btn-sm">View Project</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250' viewBox='0 0 400 250'%3E%3Crect fill='%23f0f9ff' width='400' height='250'/%3E%3Cpath fill='%230f172a' d='M100 70h200v110H100zM120 90h160v20H120zM120 120h160v20H120zM120 150h100v20H120z'/%3E%3Ccircle fill='%230ea5e9' cx='150' cy='50' r='20'/%3E%3Ccircle fill='%230ea5e9' cx='250' cy='50' r='20'/%3E%3Cpath fill='%230f172a' d='M150 50l-30-30M250 50l30-30' stroke='%230f172a' stroke-width='2'/%3E%3C/svg%3E" alt="Autonomous Research System">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Research</span>
+                            <span class="tag">Self-Correction</span>
+                            <span class="tag">Validation</span>
+                        </div>
+                        <h3>Autonomous Research Agent</h3>
+                        <p>Self-directed research, validation, and reporting system that autonomously gathers information, verifies facts, and produces comprehensive reports.</p>
+                        <a href="#" class="btn btn-sm">View Project</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250' viewBox='0 0 400 250'%3E%3Crect fill='%23f0f9ff' width='400' height='250'/%3E%3Ccircle fill='%230ea5e9' cx='200' cy='125' r='60'/%3E%3Cpath fill='%230f172a' d='M150 80l100 0-15 45 15 45-100 0 15-45-15-45z'/%3E%3Ccircle fill='%230f172a' cx='160' cy='100' r='8'/%3E%3Ccircle fill='%230f172a' cx='200' cy='100' r='8'/%3E%3Ccircle fill='%230f172a' cx='240' cy='100' r='8'/%3E%3C/svg%3E" alt="RAG Business Assistant">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">RAG</span>
+                            <span class="tag">Vector DB</span>
+                            <span class="tag">Citations</span>
+                        </div>
+                        <h3>RAG Business Assistant</h3>
+                        <p>Document-based question answering system with citations and verification capabilities, powered by vector databases for accurate retrieval.</p>
+                        <a href="#" class="btn btn-sm">View Project</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250' viewBox='0 0 400 250'%3E%3Crect fill='%23f0f9ff' width='400' height='250'/%3E%3Cpath fill='%230ea5e9' d='M100 70h200v110H100zM120 90h160v20H120zM120 120h160v20H120zM120 150h100v20H120z'/%3E%3Ccircle fill='%230f172a' cx='320' cy='100' r='15'/%3E%3Ccircle fill='%230f172a' cx='320' cy='150' r='15'/%3E%3Cpath fill='%230f172a' d='M320 115l0 20M305 135l30 0' stroke='%230f172a' stroke-width='2'/%3E%3C/svg%3E" alt="AI Content Automation">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">AI Content</span>
+                            <span class="tag">Automation</span>
+                            <span class="tag">n8n</span>
+                        </div>
+                        <h3>AI Content Automation System</h3>
+                        <p>End-to-end AI blog generation platform that automates content creation, research, editing, and publishing workflows with human oversight.</p>
+                        <a href="#" class="btn btn-sm">View Project</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250' viewBox='0 0 400 250'%3E%3Crect fill='%23f0f9ff' width='400' height='250'/%3E%3Ccircle fill='%230f172a' cx='200' cy='125' r='80'/%3E%3Ccircle fill='%230ea5e9' cx='200' cy='125' r='50'/%3E%3Ccircle fill='%230f172a' cx='200' cy='125' r='20'/%3E%3Cpath fill='%230ea5e9' d='M200 50l20 30-40 0z'/%3E%3Cpath fill='%230ea5e9' d='M270 80l30 20 0-40z'/%3E%3Cpath fill='%230ea5e9' d='M200 200l20-30-40 0z'/%3E%3Cpath fill='%230ea5e9' d='M130 80l-30 20 0-40z'/%3E%3C/svg%3E" alt="AI Planning System">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Planning</span>
+                            <span class="tag">Execution</span>
+                            <span class="tag">Self-Correction</span>
+                        </div>
+                        <h3>Agentic Planning System</h3>
+                        <p>Advanced AI agent with complex planning algorithms that break down goals into executable steps, monitors progress, and adapts strategies.</p>
+                        <a href="#" class="btn btn-sm">View Project</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250' viewBox='0 0 400 250'%3E%3Crect fill='%23f0f9ff' width='400' height='250'/%3E%3Crect fill='%230f172a' x='70' y='60' width='80' height='130' rx='10'/%3E%3Crect fill='%230f172a' x='250' y='60' width='80' height='130' rx='10'/%3E%3Ccircle fill='%230ea5e9' cx='200' cy='125' r='30'/%3E%3Cpath fill='%230f172a' d='M150 125l50-20 50 20-50 20z' stroke='%230f172a' stroke-width='2'/%3E%3C/svg%3E" alt="Tool Integration">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Tool Calling</span>
+                            <span class="tag">Integration</span>
+                            <span class="tag">APIs</span>
+                        </div>
+                        <h3>Real-World Tool Integration</h3>
+                        <p>AI agents that seamlessly integrate with real-world tools, APIs, and services to execute complex tasks in business environments.</p>
+                        <a href="#" class="btn btn-sm">View Project</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250' viewBox='0 0 400 250'%3E%3Crect fill='%23f0f9ff' width='400' height='250'/%3E%3Ccircle fill='%230ea5e9' cx='100' cy='100' r='25'/%3E%3Ccircle fill='%230ea5e9' cx='200' cy='80' r='25'/%3E%3Ccircle fill='%230ea5e9' cx='300' cy='100' r='25'/%3E%3Ccircle fill='%230ea5e9' cx='150' cy='180' r='25'/%3E%3Ccircle fill='%230ea5e9' cx='250' cy='180' r='25'/%3E%3Cpath fill='%230f172a' d='M100 100l100-20 100 20-50 80-100 0z' stroke='%230f172a' stroke-width='2'/%3E%3C/svg%3E" alt="Neural Network Architecture">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Neural Nets</span>
+                            <span class="tag">Deep Learning</span>
+                            <span class="tag">TensorFlow</span>
+                        </div>
+                        <h3>Neural Network Architectures</h3>
+                        <p>Custom deep learning models and neural network architectures designed for specific business applications and optimization challenges.</p>
+                        <a href="#" class="btn btn-sm">View Project</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250' viewBox='0 0 400 250'%3E%3Crect fill='%23f0f9ff' width='400' height='250'/%3E%3Cpath fill='%230f172a' d='M50 80h300v90H50zM80 100h80v20H80zM80 130h140v20H80z'/%3E%3Ccircle fill='%230ea5e9' cx='320' cy='125' r='20'/%3E%3Cpath fill='%230ea5e9' d='M280 125l60-20 0 40z'/%3E%3C/svg%3E" alt="Data Pipeline">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Data Pipeline</span>
+                            <span class="tag">ETL</span>
+                            <span class="tag">Processing</span>
+                        </div>
+                        <h3>AI Data Pipeline Systems</h3>
+                        <p>Robust data processing pipelines that prepare, clean, and optimize data for AI model training and inference at scale.</p>
+                        <a href="#" class="btn btn-sm">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+            </div>
+            <div class="contact-content">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Let's talk about your project</h3>
+                        <p>I'm currently available for freelance work and exciting opportunities. Feel free to reach out and let's create something amazing together.</p>
+
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i>📧</i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Email</h4>
+                                    <a href="mailto:hassanagenticai@gmail.com">hassanagenticai@gmail.com</a>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i>📱</i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Phone</h4>
+                                    <a href="tel:03162509185">03162509185</a>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i>📍</i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Location</h4>
+                                    <p>San Francisco, CA</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <input type="text" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Subject">
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="Your Message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>Hassan Dawood</h3>
+                    <p>Building autonomous AI systems that solve real business problems. Specializing in agentic architectures, multi-LLM orchestration, and production-ready AI workflows.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">gh</a>
+                        <a href="#" class="social-link">tw</a>
+                        <a href="#" class="social-link">ar</a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Expertise</h4>
+                    <ul>
+                        <li><a href="#">Agentic AI Systems</a></li>
+                        <li><a href="#">Multi-LLM Orchestration</a></li>
+                        <li><a href="#">RAG Pipelines</a></li>
+                        <li><a href="#">AI Workflow Automation</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 Hassan Dawood. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.project-card, .about-text, .about-image, .contact-info, .contact-form').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
